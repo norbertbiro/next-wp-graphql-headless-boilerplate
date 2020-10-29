@@ -7,7 +7,7 @@ export default function Home({allPosts}) {
     <div>
       <Head>
         <title>Next.js - Headless WP - Graphql boilerplate</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.ico"/>
       </Head>
       <main>
         {console.log(allPosts)}
