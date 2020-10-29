@@ -24,11 +24,11 @@ async function fetchAPI(query, { variables } = {}) {
 }
 
 // get all blog posts
-export async function getAllPosts(preview) {
+export async function getAllPosts(lang = "DE") {
   const data = await fetchAPI(
     `
-    query AllPosts {
-      posts(first: 20, where: {orderby: {field: DATE, order: DESC}}) {
+    query AllPosts($lang: LanguageCodeFilterEnum) {
+      posts(first: 20, where: {orderby: {field: DATE, order: DESC}, language: $lang}) {
         edges {
           node {
             id
@@ -39,7 +39,12 @@ export async function getAllPosts(preview) {
         }
       }
     }
-    `
+    `,
+    {
+      variables: {
+        lang: lang,
+      }
+    }
   );
 
   return data?.posts;
