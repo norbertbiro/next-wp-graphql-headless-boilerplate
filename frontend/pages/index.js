@@ -1,13 +1,29 @@
 import Head from 'next/head'
+import {getAllPosts} from "../lib/api";
 
 
-export default function Home() {
+export default function Home({allPosts}) {
   return (
     <div>
       <Head>
         <title>Next.js - Headless WP - Graphql boilerplate</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <main>
+        {console.log(allPosts)}
+        {allPosts?.edges.map(node => <h1>{node?.slug}</h1>)}
+      </main>
     </div>
   )
+}
+
+export async function getStaticProps(ctx) {
+  const allPosts = await getAllPosts();
+
+  return {
+    props: {
+      allPosts
+    },
+    revalidate: 1,
+  }
 }
