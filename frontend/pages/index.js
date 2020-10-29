@@ -11,7 +11,7 @@ export default function Home({allPosts}) {
       </Head>
       <main>
         {console.log(allPosts)}
-        {allPosts?.edges.map(node => <h1>{node?.slug}</h1>)}
+        {allPosts?.edges.map(({node}, index) => <h1 key={index}>{node?.slug}</h1>)}
       </main>
     </div>
   )
